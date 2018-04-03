@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.supermap</groupId>
+	<artifactId>Managed-Service-1</artifactId>
+	<version>0.0.1</version>
+	<packaging>war</packaging>
+
+	<name>Managed-Service-1</name>
+	<description>Demo project for Spring Boot</description>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.10.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+		<json-lib>2.4</json-lib>
+		<shiro-core>1.4.0</shiro-core>
+	</properties>
+
+	<dependencies>
+		
+         <!-- Spring Boot 组件 -->
+		    <dependency>
+			   <groupId>org.springframework.boot</groupId>
+			   <artifactId>spring-boot-starter-web</artifactId>
+			   <exclusions>
+			   	 <!--exclusion 需要去除的 包 -->
+			      <exclusion>
+			         <groupId>org.springframework.boot</groupId>
+			         <artifactId>spring-boot-starter-tomcat</artifactId>
+			      </exclusion>
+			      <exclusion>  
+		                <groupId>org.springframework.boot</groupId>  
+		                <artifactId>spring-boot-starter-logging</artifactId>  
+		          </exclusion>
+			   </exclusions>
+			</dependency>
+		<!-- tomcat Web 容器 -->
+		 <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency> 
+		 <!-- Spring Boot Web 依赖 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+		<!-- 热部署支持组件 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<!-- json依赖 -->
+		<dependency>
+			<groupId>net.sf.json-lib</groupId>
+			<artifactId>json-lib</artifactId>
+			<version>${json-lib}</version>
+			<classifier>jdk15</classifier><!--指定jdk版本 -->
+		</dependency>
+
+		<!-- gson依赖 -->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+		</dependency>
+		<!-- slf4j-simple依赖 -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+		</dependency>
+		<!-- jersey-client依赖 -->
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-client</artifactId>
+			<version>1.19</version>
+		</dependency>
+		
+		 <!--配置servlet-->  
+        <dependency>  
+            <groupId>javax.servlet</groupId>  
+            <artifactId>javax.servlet-api</artifactId>  
+        </dependency>  
+  
+        <!--配置jsp jstl的支持-->  
+        <dependency>  
+            <groupId>javax.servlet</groupId>  
+            <artifactId>jstl</artifactId>  
+        </dependency>  
+        
+         <!--对jsp的支持-->  
+        <dependency>  
+            <groupId>org.apache.tomcat.embed</groupId>  
+            <artifactId>tomcat-embed-jasper</artifactId>  
+        </dependency>  
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>  
+        <finalName>ms</finalName>  
+        <plugins>  
+            <plugin>  
+                <groupId>org.springframework.boot</groupId>  
+                <artifactId>spring-boot-maven-plugin</artifactId>  
+            </plugin>  
+        </plugins>  
+    </build>  
+   
+   <repositories>  
+        <repository>  
+            <id>spring-milestone</id>  
+            <url>http://repo.spring.io/libs-release</url>  
+        </repository>  
+    </repositories> 
+
+
+</project>

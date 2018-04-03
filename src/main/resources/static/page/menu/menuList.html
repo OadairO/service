@@ -1,0 +1,45 @@
+<html>
+<head>
+	<meta charset="utf-8">
+    <title>菜单列表</title>
+</head>
+<link rel="stylesheet" href="../../layui/css/layui.css" media="all" />
+<link rel="stylesheet" href="../../libs/font-awesome-4.7.0/css/font-awesome.min.css" media="all" />
+<body>
+<form class="layui-form " action="">
+<blockquote class="layui-elem-quote quoteBox" style="margin-top: -10px;">
+       <div class="magb15  layui-col-xs3">
+		 	<label class="layui-form-label">类型</label>
+       	</div>
+       	 <div class="magb15  layui-col-xs3">
+        <label class="layui-form-label">菜单名称:</label>
+        <div class="layui-input-inline">
+            <input type="text" name="name" placeholder="请输入菜单名称" class="layui-input">
+        </div>
+        </div>
+         <div class="magb15  layui-col-xs3">
+        <label class="layui-form-label">上级菜单:</label>
+        <div class="layui-input-inline">
+        	 <input type="text" name="parentName" placeholder="请输入上级菜单"名称" class="layui-input">
+        </div>
+        </div>
+            <button class="layui-btn layui-btn-sm search-btn" table-id="menuTable" lay-submit="" lay-filter="search"><i class="fa fa-search">&nbsp;</i>查询</button>
+            <button type="reset" class="layui-btn layui-btn-sm layui-btn-primary"><i class="fa fa-refresh">&nbsp;&nbsp;</i>重置</button>
+			<a class="layui-btn layui-btn-sm layui-btn-normal addMenu_btn"><i class="layui-icon">&#xe654;</i>添加菜单</a>
+       </blockquote>
+    </div>
+</form>
+<div class="layui-form ">
+    <table id="menuList" lay-filter="menuList"></table>
+</div>
+<!--操作-->
+<script type="text/html" id="menuListBar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
+</script>
+<script type="text/javascript" src="../../libs/jquery.min.js"></script>
+<script type="text/javascript" src="../../libs/paht.js"></script>
+<script type="text/javascript" src="../../layui/layui.all.js"></script>
+<script type="text/javascript" src="js/menuList.js"></script>
+</body>
+</html>

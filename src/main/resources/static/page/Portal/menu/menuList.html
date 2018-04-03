@@ -1,0 +1,28 @@
+<html>
+<head>
+	<meta charset="utf-8">
+    <title>菜单列表</title>
+</head>
+<link rel="stylesheet" href="../../../layui/css/layui.css" media="all" />
+	<link rel="stylesheet" href="../../../css/public.css" media="all" />
+<body>
+<form class="layui-form" action="">
+<blockquote class="layui-elem-quote quoteBox" >
+	<label class=" magb10 layui-col-xs1" style="margin-top: 8px;">是否开启门户网站</label>
+	<input type="checkbox" name="portal" lay-filter="portal" lay-skin="switch" lay-text="开启|关闭" checked/>
+</blockquote>
+</form>
+<div class="layui-form ">
+    <table id="menuList" lay-filter="menuList"></table>
+</div>
+<!--操作-->
+<script type="text/html" id="menuListBar">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs layui-btn-primary" lay-event="look">预览</a>
+</script>
+<script type="text/javascript" src="../../../libs/jquery.min.js"></script>
+<script type="text/javascript" src="../../../libs/paht.js"></script>
+<script type="text/javascript" src="../../../layui/layui.all.js"></script>
+<script type="text/javascript" src="js/menuList.js"></script>
+</body>
+</html>

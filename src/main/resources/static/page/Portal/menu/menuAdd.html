@@ -1,0 +1,116 @@
+<!--
+* 添加页面
+*-->
+<html>
+<head>
+	<meta charset="utf-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../../libs/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../libs/ztree/css/metroStyle/metroStyle.css">
+</head>
+<body>
+<div class="layui-field-box">
+    <form class="layui-form" action="">
+     <input type="hidden" id="menuId" name="menuId" >
+        <div class="layui-form-item">
+            <label class="layui-form-label">类型<span class="span_must">*</span></label>
+            <div class="layui-input-normal">
+            <input type="radio" lay-filter="menuType" id="menuMl" name="type"  value="0" title="目录">
+            <input type="radio" lay-filter="menuType" id="menuCd" name="type" value="1" title="菜单" checked>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">菜单名称<span class="span_must">*</span></label>
+            <div class="layui-input-normal">
+                <input type="text" id="name" name="name" lay-verify="required" autocomplete="off" placeholder="请输入菜单名称"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">上级菜单<span class="span_must">*</span></label>
+            <div class="layui-input-normal">
+                <input id="parentName" name="parentName" cyType="treeTool" 
+                       cyProps="url:'../../getTreeList',name:'parentId'"
+                       placeholder="请选择上级菜单" class="layui-input"/>
+                <!-- 选择菜单 -->
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">菜单URL<span class="label_span">:</span></label>
+            <div class="layui-input-normal">
+                <input type="text" id="url" name="url" placeholder="请输入url" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">排序号<span class="label_span">:</span></label>
+            <div class="layui-input-normal">
+                <input type="text" id="order_num" name="order_num" placeholder="请输入排序号" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">图标<span class="label_span">:</span></label>
+            <div class="layui-input-normal">
+                <input type="text" id="icon" name="icon" placeholder="请输入图标" autocomplete="off" class="layui-input">
+                <code style="margin-top: 4px; display: block;">获取图标：http://fontawesome.dashgame.com/</code>
+            </div>
+        </div>
+        <div class="page-footer">
+            <div class="btn-list">
+                <div class="btnlist">
+                    <button class="layui-btn" lay-submit="" lay-filter="submit" ><i
+                            class="fa fa-floppy-o">&nbsp;</i>保存
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="../../libs/jquery.min.js"></script>
+<script type="text/javascript" src="../../libs/paht.js"></script>
+<script src="../../libs/ztree/jquery.ztree.all.min.js"></script>
+<script src="../../libs/ztree/treeTool.js"></script>
+<script src="../../libs/layui/layui.js"></script>
+<script>
+    layui.use(['form', 'layer'], function () {
+        var form = layui.form();
+        //监听单选
+        form.on('radio(menuType)', function (data) {
+            if (data.value == 0) {
+                $(".layui-form-item").show();
+                $("[name='url']").parent().parent().hide();
+                form.render();
+                return false;
+            }
+            if (data.value == 1) {
+                $(".layui-form-item").show();
+                form.render();
+                return false;
+            }
+        });
+        form.on('submit(submit)', function(data){
+        	    $.ajax({
+                  type: "post",
+                  url: localhostPaht  + "saveMenu",
+                  data: data.field,
+                  async: false,
+                  success: function (R) {
+                      if (R === 0) {
+                          window.parent.location.reload();
+                          var index=parent.layer.getFrameIndex(window.name);
+                      	  parent.layer.close(index);
+                      } else {
+                          layer.msg('操作异常！');
+                      }
+                  },
+                  error: function () {
+                      alert("系统繁忙");
+                  }
+              }); 
+        	  return false; 
+        	}); 
+
+    });
+</script>
+</body>
+</html>

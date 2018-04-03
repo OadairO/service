@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>用户审核</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="../../layui/css/layui.css" media="all" />
+	<link rel="stylesheet" href="../../css/public.css" media="all" />
+</head>
+<body class="childrenBody">
+<form class="layui-form layui-row" >
+<input type="hidden" id="userId" name="userId" class="layui-input">
+	<div class="layui-col-md2 layui-col-xs12 user_right">
+		<div class="layui-upload-list">
+			<img class="layui-upload-img layui-circle userFaceBtn userAvatar" src="../../images/face1.jpg" id="HeadImage">
+		</div>
+	</div>
+	<div class="layui-col-md10 layui-col-xs12">
+	<div class="magb15 layui-col-md4 layui-col-xs12">
+		<label class="layui-form-label">用户登录名</label>
+		<div class="layui-input-block">
+			<input type="text" placeholder="未填写登录名" id="loginName" class="layui-input" disabled="disabled">
+		</div>
+	</div>
+	<div class="magb15 layui-col-md4 layui-col-xs12">
+		<label class="layui-form-label">真实名字</label>
+		<div class="layui-input-block">
+			<input type="text" placeholder="未填写真实名字" autocomplete="off" id="username" class="layui-input" disabled="disabled">
+		</div>
+	</div>
+	
+	<div class="magb15 layui-col-md4 layui-col-xs12">
+		<label class="layui-form-label">显示名称</label>
+		<div class="layui-input-block">
+			<input type="text" placeholder="未填写显示名称" autocomplete="off" id="showName" class="layui-input" disabled="disabled">
+		</div>
+	</div>
+	
+	<div class="magb15 layui-col-md4 layui-col-xs12">
+		<label class="layui-form-label">邮箱</label>
+		<div class="layui-input-block">
+			<input type="text" placeholder="未填写邮箱" autocomplete="off" id="Email" class="layui-input" disabled="disabled">
+		</div>
+	</div>
+	
+	<div class="magb15 layui-col-md4 layui-col-xs12">
+		<label class="layui-form-label">电话号码</label>
+		<div class="layui-input-block">
+			<input type="text" placeholder="未填写电话号码" autocomplete="off" id="mobile" class="layui-input" disabled="disabled">
+		</div>
+	</div>
+	
+	<div class="magb15 layui-col-md4 layui-col-xs12">
+			<label class="layui-form-label">角色</label>
+			<div class="layui-input-block">
+			<input type="text" placeholder="未填写角色" id="roleCod" value="种植大户" class="layui-input" disabled="disabled">
+			</div>
+		</div>
+	
+	<div class="layui-form-item userAddress">
+		<label class="layui-form-label">用户区域</label>
+		<div class="layui-input-inline">
+		<input type="text" placeholder="未填写角色" id="area" value="种植大户" class="layui-input" disabled="disabled">
+		</div>
+	</div>
+		
+	</div>
+	<div class="layui-form-item">
+			<label class="layui-form-label">简介</label>
+			<div class="layui-input-block">
+				<textarea placeholder="未填写" id="Introduction"  class="layui-textarea myself" disabled="disabled"></textarea>
+			</div>
+		</div>
+	<div class="layui-form-item layui-row layui-col-xs12">
+		<div class="layui-input-block">
+			<button class="layui-btn layui-btn-sm layui-btn-warm" lay-submit="" lay-filter="auditFailure">审核不通过</button>
+			<button class="layui-btn layui-btn-sm" lay-submit="" lay-filter="verified">审核通过</button>
+			<button class="layui-btn layui-btn-sm layui-btn-danger" lay-submit="" lay-filter="blacklist">拉入黑名单</button>
+		</div>
+	</div>
+</form>
+<script type="text/javascript" src="../../libs/jquery.min.js"></script>
+<script type="text/javascript" src="../../libs/paht.js"></script>
+<script type="text/javascript" src="../../libs/layui/layui.js"></script>
+<script type="text/javascript">
+layui.use(['form', 'layer'], function () {
+    var form = layui.form();
+    form.on('submit(auditFailure)', function(data){
+    	userSh(data.field.userId,1);
+    	return false; 
+   	});
+    form.on('submit(verified)', function(data){
+    	userSh(data.field.userId,0);
+    	return false; 
+   	}); 
+    form.on('submit(blacklist)', function(data){
+    	userSh(data.field.userId,2);
+    	return false; 
+   	}); 
+    function userSh(userid,state){
+    	$.ajax({
+            type: "post",
+            url: "../../userAudit",
+            data: {"userId":userid,"state":state},
+            async: false,
+            success: function (R) {
+                if (R) {
+                    window.parent.location.reload();
+                    var index=parent.layer.getFrameIndex(window.name);
+                	  parent.layer.close(index);
+                } else {
+                    layer.msg('审核操作失败！');
+                }
+            },
+            error: function () {
+            	layer.msg('系统繁忙！');
+            }
+        }); 
+    }
+
+});
+
+
+</script>
+</body>
+</html>
